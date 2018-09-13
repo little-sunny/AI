@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Machine Learning</title>
+    <link rel="stylesheet" href="../static/my.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                var i = 0;
+
+                var clone = $(".banner .img li").first().clone();//克隆第一张图片
+                $(".banner .img").append(clone);//复制到列表最后
+                var size = $(".banner .img li").size();
+
+
+                for (var j = 0; j < size-1; j++) {
+                    $(".banner .num").append("<li></li>");
+                }
+
+                $(".banner .num li").first().addClass("on");
+
+                /*自动轮播*/
+
+                var t = setInterval(function () { i++; move();},2000);
+
+                /*鼠标悬停事件*/
+
+                $(".banner").hover(function () {
+                    clearInterval(t);//鼠标悬停时清除定时器
+                }, function () {
+                    t = setInterval(function () { i++; move(); }, 2000); //鼠标移出时清除定时器
+                });
+
+
+
+
+                /*鼠标滑入原点事件*/
+
+                $(".banner .num li").hover(function () {
+
+                    var index = $(this).index();//获取当前索引值
+                    i = index;
+                    $(".banner .img").stop().animate({ left: -index * 500 }, 500);
+                    $(this).addClass("on").siblings().removeClass("on");
+                });
+
+
+
+                /*向左按钮*/
+                $(".banner .btn_l").click(function () {
+                    i++;
+                    move();
+                })
+
+
+                /*向右按钮*/
+                $(".banner .btn_r").click(function () {
+                    i--;
+                    move();
+                })
+
+                /*移动事件*/
+                function move() {
+                    if (i == size) {
+                        $(".banner .img").css({ left: 0 });
+                        i = 1;
+                    }
+                    if (i == -1) {
+                        $(".banner .img").css({ left: -(size - 1) * 500 });
+                        i = size - 2;
+                    }
+                    $(".banner .img").stop().animate({ left: -i * 500 }, 500);
+
+                    if (i == size - 1) {
+                        $(".banner .num li").eq(0).addClass("on").siblings().removeClass("on");
+                    } else {
+                        $(".banner .num li").eq(i).addClass("on").siblings().removeClass("on");
+                    }
+                }
+            });
+
+
+        </script>
+</head>
+<body>
+   <!-- <form enctype="multipart/form-data" method="POST">
+       {% csrf_token %}
+       {{ uf.as_p }}
+       <input type="file" name="upload" />
+       <br/>
+       <input type="submit" value="submit" />
+   </form>
+    -->
+   <!--
+   <form action="/training/" method="get">
+       <button type="submit" class="btn btn-success" name="training"><font size="4">Training</font></button>
+   </form>
+   -->
+
+    <div id="nav">
+        <span id="top-left">
+        <span><img src="../static/images/mini2.jpg"></span>
+            <span class="text-botton"><a href="#">首页</a></span>  <span class="text-botton"><a href="#">更多</a></span>
+        </span>
+        <span id="top-right">
+            <img src="../static/images/mini2.jpg"> <span class="text-botton">登录 注册 </span><span class="free-botton">更多相关</span>
+        </span>
+        <br><br><br><br><br>
+        <div id="liu"></div>
+    </div>
+
+    <div id="nav-s">
+        <div><img src="../static/images/NSB1.jpg"></div>
+        <form action="#">
+            <input type="file" class="ser" name="upload"><input type="submit"class="ser-submit"name="submit">
+        </form>
+    
+    </div>
+
+    <div id="ad"></div>
+
+    <div id="main">
+        <div class="banner">
+            <ul class="img">
+                <li><img src="../static/images/mini2.jpg" alt=""/></li>
+                <li><img src="../static/images/miniNokialogo.jpg" alt="" /></li>
+                <li><img src="../static/images/beijing1.jpg" alt="" /></li>
+                <li><img src="../static/images/tim.jpg" alt="" /></li>
+            </ul>
+            <ul class="num">
+
+            </ul>
+            <div class="btn btn_l">&lt;</div>
+            <div class="btn btn_r">&gt;</div>
+        </div>
+      <!--  <div class="house">
+            <ul>
+               <li><img src="../static/images/toplogo.jpg"></li>
+                <li><img src="#"></li>
+                <li><img src="#"></li>
+                <li><img src="#"></li>
+                <li><img src="#"></li>
+                <li><img src="#"></li>
+                <li><img src="#"></li>
+                <li><img src="#"></li>
+                <li><img src="#"></li>
+            </ul>
+        </div>-->
+        <div id="ad"></div>
+             <div id="comments">点评
+                 <div id="user1">
+                    <div class="font-30px">用户点评</div>
+                    <div><img src="#"></div>
+                     <div class="font-15px">用户名字</div>
+                     <div class="usercomments">点评asdq wasd asdqwrasd aasd</div>
+                 </div>
+                 <div id="user2">
+                    <div class="font-30px">设计点评</div>
+                    <div><img src="#"></div>
+                     <div class="font-15px">设计名字</div>
+                     <div class="usercomments">点评asdq wasd asdqwrasd aasd</div>
+                 </div>
+            </div>
+    </div>
+
+
+    <div id="footer">版权归属：AI team <br>电话：xxxxxxx <br>网址：xxxx.com </div>
+
+
+
+
+</body>
+</html>

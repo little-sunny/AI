@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Machine Learning</title>
+</head>
+<body>
+
+    <div>
+        <p><font size="4" color="blue">{{upload_result}}</font></p>
+    </div>
+
+      <h2 class="sub-header">You can Train mode</h2>
+
+    <form action="/training/" method="POST">
+        {% csrf_token %}
+        {{ uf.as_p }}
+        <!--
+        <input type="checkbox" value="LSTM" name="check_box_list"/>LSTM
+        <input type="checkbox" value="Algorithm2" name="check_box_list"/>Algorithm2
+        <input type="checkbox" value="Algorithm3" name="check_box_list"/>Algorithm3
+        <input type="checkbox" value="Algorithm4" name="check_box_list"/>Algorithm4
+        <button type="submit" class="btn btn-success" name="training"><font size="4">Training</font></button>
+        -->
+        <p>please select algorithm</p>
+        <input type="radio" name = 'algorithm' value ="LSTM"/>LSTM
+        <input type="radio" name = 'algorithm' value="Algorithm2"/>Algorithm2
+        <input type="radio" name = 'algorithm' value="Algorithm3"/>Algorithm3
+        <input type="radio" name = 'algorithm' value="Algorithm4"/>Algorithm4
+        <button type="submit" class="btn btn-success" name="training"><font size="4">Training</font></button>
+
+
+</form>
+
+
+    <!--
+    <div>
+        <form action="/training/" method="get">
+            <button type="submit" class="btn btn-success" name="training"><font size="4">Training</font></button>
+        </form>
+    </div>
+    -->
+
+</body>
+</html>
+
+
